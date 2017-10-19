@@ -1,0 +1,44 @@
+[
+  {
+    "model": "cholito.Abuso",
+    "pk": 1,
+    "fields": {
+      "tipo": "Abandono en la calle"
+    }
+  },
+  {
+    "model": "cholito.Abuso",
+    "pk": 2,
+    "fields": {
+      "tipo": "Exposición a temperaturas extremas"
+    }
+  },
+  {
+    "model": "cholito.Abuso",
+    "pk": 3,
+    "fields": {
+      "tipo": "Falta de agua"
+    }
+  },
+  {
+    "model": "cholito.Abuso",
+    "pk": 4,
+    "fields": {
+      "tipo": "Falta de comida"
+    }
+  },
+  {
+    "model": "cholito.Abuso",
+    "pk": 5,
+    "fields": {
+      "tipo": "Violencia"
+    }
+  },
+  {
+    "model": "cholito.Abuso",
+    "pk": 6,
+    "fields": {
+      "tipo": "Venta ambulante"
+    }
+  }
+]
