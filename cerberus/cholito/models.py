@@ -34,7 +34,7 @@ class Animal(models.Model):
 
 
 class Abuso (models.Model):
-    tipo = models.CharField (max_length=15)
+    tipo = models.CharField(max_length=15)
 
     class Meta:
         verbose_name = 'Abuso'
@@ -56,8 +56,8 @@ class Denuncia (models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(choices=estado_opciones, max_length=15, default='Reportada')
     abuso = models.ManyToManyField(Abuso, blank=True)
-    localizacion = models.CharField(max_length=300, verbose_name='Lugar de la denuncia') # Dummy
-    animal = models.ForeignKey('TipoDeAnimal', verbose_name= 'Tipo de animal')
+    localizacion = models.CharField(max_length=300, verbose_name='Lugar de la denuncia')  # Dummy
+    animal = models.ForeignKey('TipoDeAnimal', verbose_name='Tipo de animal')
     sexo = models.CharField(choices=sexo_opciones, max_length=1, blank=True)
     color = models.CharField(max_length=50, blank=True)
     herido = models.NullBooleanField(default=None)
