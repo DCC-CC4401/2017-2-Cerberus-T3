@@ -17,9 +17,13 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from django.contrib.auth import views as auth_views
 from cerberus import settings
+from cholito.forms import LoginForm
 
 urlpatterns = [
     url(r'^', include('cholito.urls')),
+    url(r'^login/$', auth_views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/login'}),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

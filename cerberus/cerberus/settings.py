@@ -127,3 +127,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = 'media'
+
+LOGIN_REDIRECT_URL = 'index' # TODO cambiar por home
+LOGIN_URL = 'login'
