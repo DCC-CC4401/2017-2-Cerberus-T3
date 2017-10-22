@@ -1,9 +1,14 @@
 from django.db import models
 
 sexo_opciones = (
+    (None, 'No especifica'),
     ('M', 'Masculino'),
     ('F', 'Femenino')
 )
+
+
+def crear_tipo_de_animal_por_defecto():
+    return TipoDeAnimal.objects.get_or_create(tipo='Otro')
 
 
 class TipoDeAnimal(models.Model):
@@ -57,7 +62,7 @@ class Denuncia (models.Model):
     estado = models.CharField(choices=estado_opciones, max_length=15, default='Reportada')
     abuso = models.ManyToManyField(Abuso, blank=True)
     localizacion = models.CharField(max_length=300, verbose_name='Lugar de la denuncia')  # Dummy
-    animal = models.ForeignKey('TipoDeAnimal', verbose_name='Tipo de animal')
+    animal = models.ForeignKey('TipoDeAnimal', verbose_name='Tipo de animal', default=crear_tipo_de_animal_por_defecto)
     sexo = models.CharField(choices=sexo_opciones, max_length=1, blank=True)
     color = models.CharField(max_length=50, blank=True)
     herido = models.NullBooleanField(default=None)

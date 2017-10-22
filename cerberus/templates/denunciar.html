@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Title</title>
+<style>
+    .borderless td, .borderless th {
+        border: none;
+    }
+
+    </style>
+{% endblock %}
+
+
+
+{% block body %}
+
+<div style="width:60%">
+    <form action="{% url 'denunciar' %}" method="post">
+        {%csrf_token%}
+        {% for error in form.non_field_errors %}
+        <div class="form-group has-errors text-danger small">
+            {{error}}
+        </div>
+        {% endfor %}
+
+        {% for field in form %}
+            <div class="form-group has-errors text-danger small">
+                {{field.errors}}
+            </div>
+
+            <div class="form-group has-errors text-danger small">
+            </div>
+        {% endfor %}
+            <div class="form-group">
+                <table class="table borderless" style="align-content: center">
+                    <tr>
+                        <td>{{ form.abuso.label }}:</td>
+                        <td colspan="2">{{ form.abuso.0 }}</td>
+                        <td>{{ form.abuso.3 }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>{{ form.abuso.2 }}</td>
+                        <td>{{ form.abuso.4 }}</td>
+                        <td>{{ form.abuso.5 }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="3">{{ form.abuso.1 }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form.animal.label }}:</td>
+                        <td>{{ form.animal }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form.sexo.label }}:</td>
+                        <td>{{ form.sexo.1 }}</td>
+                        <td>{{ form.sexo.2 }}</td>
+                        <td>{{ form.sexo.0 }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form.herido.label }}:</td>
+                        <td>{{ form.herido }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form.color.label }}:</td>
+                        <td colspan="3">{{ form.color }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" align="center"><button type="submit" class="btn btn-primary" style="width: 40%">Denunciar</button></td>
+                    </tr>
+                </table>
+            </div>
+    </form>
+</div>
+
+{% endblock %}

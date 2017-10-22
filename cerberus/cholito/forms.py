@@ -1,5 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
+from django.forms import ModelForm
+from .models import Denuncia
+from django.utils.translation import ugettext_lazy as _
 
 
 class LoginForm(AuthenticationForm):
@@ -20,3 +23,21 @@ class LoginForm(AuthenticationForm):
             self.request.session.set_expiry(0)
 
         return cleaned_data
+
+
+class DenunciaForm(ModelForm):
+    class Meta:
+        model = Denuncia
+        fields = ['abuso', 'animal', 'sexo', 'color', 'herido']
+        labels = {
+            'abuso': _('Abuso'),
+            'animal': _('Animal'),
+            'sexo': _('Sexo'),
+            'color': _('Color'),
+            'herido': _('Herido'),
+        }
+        widgets = {
+            'sexo': forms.RadioSelect,
+            'abuso': forms.CheckboxSelectMultiple,
+            'herido': forms.NullBooleanSelect,
+        }
