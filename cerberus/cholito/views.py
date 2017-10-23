@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from cholito.forms import DenunciaForm
+from .forms import DenunciaForm, SignUpForm
 
-from cholito.models import Denuncia
+from .models import Denuncia, UsuarioNormal, UsuarioMunicipalidad, UsuarioONG
 
 
 def index(request):
@@ -30,10 +30,41 @@ def denunciar(request):
             messages.success(request, 'Denuncia realizada con éxito', extra_tags='alert')
             return redirect('index')
 
-        else:
-            print('NO ES VALIDO M3N')
-
     else:
         form = DenunciaForm()
 
     return render(request, 'denunciar.html', {'form': form})
+
+
+def crear_usuario(request):
+    if request.method == 'POST':
+
+        form = SignUpForm(request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data['username']
+            clave1 = form.cleaned_data['password1']
+            clave2 = form.cleaned_data['password2']
+            tipo = form.cleaned_data['user_type']
+
+            usar=''
+
+            if tipo == 'Usuario':
+                user = UsuarioNormal.objects.create_user(usuario)
+            elif tipo == 'Municipalidad':
+                user = UsuarioMunicipalidad.objects.create_user(usuario)
+            else:
+                user = UsuarioONG.objects.create_user(usuario)
+
+
+            user.set_password(clave1)
+            user.save()
+
+
+            messages.success(request, 'Usuario ' + usuario + ' creado con éxito', extra_tags='alert')
+            return redirect('index')
+
+    else:
+        form = SignUpForm()
+
+    return render(request, 'signUp.html', {'form': form})

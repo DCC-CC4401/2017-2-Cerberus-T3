@@ -139,3 +139,10 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+# Authentication
+AUTHENTICATION_BACKENDS = (
+    'cholito.auth.UsuariosBackend',
+)
+
+AUTH_USER_MODEL = 'cholito.Usuario'

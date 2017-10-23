@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 sexo_opciones = (
@@ -73,3 +74,35 @@ class Denuncia (models.Model):
 
     def __str__(self):
         return self.estado
+
+
+class Usuario(AbstractUser):
+    pass
+
+
+class UsuarioNormal(Usuario):
+    class Meta:
+        verbose_name = 'Persona Natural'
+        verbose_name_plural = 'Personas Naturales'
+
+
+class UsuarioMunicipalidad(Usuario):
+    foto = models.ImageField(upload_to='municipalidad_pictures/', blank=True)
+
+    class Meta:
+        verbose_name = 'Representante Municipal'
+        verbose_name_plural = 'Representantes Municipales'
+
+
+class UsuarioONG(Usuario):
+    foto = models.ImageField(upload_to='ong_pictures/', blank=True)
+
+    class Meta:
+        verbose_name = 'Representante ONG'
+        verbose_name_plural = 'Representantes ONG'
+
+
+class UsuarioAdministrador(Usuario):
+    class Meta:
+        verbose_name = 'Administrador'
+        verbose_name_plural = 'Administradores'
