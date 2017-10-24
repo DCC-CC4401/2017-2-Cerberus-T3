@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Denuncia #{{ denuncia.id }}</title>
+    <style>
+        body {
+    background-color: #e6e6e6;
+}
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+</head>
+<body>
+<h1 style="text-align: center;">Denuncia #{{ denuncia.id }}</h1>
+<p>&nbsp;</p>
+<div>
+    <table style="margin-left: auto; margin-right: auto; text-align: left">
+        <tr>
+            <th>Tipo de denuncia:</th>
+            <td>{{ denuncia.getAbusos }}&nbsp;</td>
+            <th>Tipo de animal:</th>
+            <td>{{ denuncia.animal }}&nbsp;</td>
+            <th>Color:</th>
+            <td>{{ denuncia.getColor }}&nbsp;</td>
+        </tr>
+
+        <tr>
+            <th>Dirección:</th>
+            <td>{{ denuncia.localizacion }}&nbsp;</td>
+            <th>Sexo:</th>
+            <td>{{ denuncia.getSexo }}&nbsp;</td>
+            <th>Herido:</th>
+            <td>{{ denuncia.isHerido }}&nbsp;</td>
+        </tr>
+    </table>
+    <div>&nbsp;<img style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/map.jpg' %}" alt="" width="463" height="292" /></div>
+    <div><a href="{% url 'home' %}">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        Volver
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -14,9 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 
+from django.contrib.auth import views as auth_views
+from cerberus import settings
+from cholito.forms import LoginForm
+
 urlpatterns = [
-    url(r'^/', include('polls.urls')),
+    url(r'^', include('cholito.urls')),
+    url(r'^login/$', auth_views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
