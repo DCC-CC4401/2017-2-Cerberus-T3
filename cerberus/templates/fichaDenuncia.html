@@ -9,6 +9,8 @@
     background-color: #e6e6e6;
 }
     </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
 </head>
 <body>
 <h1 style="text-align: center;">Denuncia #{{ denuncia.id }}</h1>
@@ -34,6 +36,11 @@
         </tr>
     </table>
     <div>&nbsp;<img style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'img/map.jpg' %}" alt="" width="463" height="292" /></div>
+    <div><a href="{% url 'home' %}">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        Volver
+        </a>
+    </div>
 </div>
 
 </body>
