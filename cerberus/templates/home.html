@@ -321,11 +321,11 @@ user experience. -->
             placeMarker(map, event.latLng);
         });
         var infowindow = new google.maps.InfoWindow({
-            content:"ONG Favorita"
+            content:{% if usuario != None %}"ONG Favorita"{% else %}"ONG"{% endif %}
         });
         var markerOne = new google.maps.Marker({
             position: centerOne,
-            icon: "{% static 'img/star2.png' %}"
+            icon: {% if usuario != None %}"{% static 'img/star2.png' %}"{% else %}"{% static 'img/pin.png' %}"{% endif %}
         });
         markerOne.setMap(map);
         infowindow.open(map,markerOne);
