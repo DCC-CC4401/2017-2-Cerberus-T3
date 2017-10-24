@@ -30,6 +30,7 @@ class Animal(models.Model):
     sexo = models.CharField(choices=sexo_opciones, max_length=1)
     edad = models.PositiveSmallIntegerField()
     fechaAdopcion = models.DateField(verbose_name='En adopción desde', auto_now_add=True)
+    descripcion = models.CharField(max_length=600)
 
     class Meta:
         verbose_name = 'Animal'
@@ -37,6 +38,34 @@ class Animal(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def getFechaInicioAdopcion(self):
+        mes = self.fechaAdopcion.month
+        anho = self.fechaAdopcion.year
+        if mes == 1:
+            return 'Enero ' + str(anho)
+        elif mes == 2:
+            return 'Febrero ' + str(anho)
+        elif mes == 3:
+            return 'Marzo ' + str(anho)
+        elif mes == 4:
+            return 'Abril ' + str(anho)
+        elif mes == 5:
+            return 'Mayo ' + str(anho)
+        elif mes == 6:
+            return 'Junio ' + str(anho)
+        elif mes == 7:
+            return 'Julio ' + str(anho)
+        elif mes == 8:
+            return 'Agosto ' + str(anho)
+        elif mes == 9:
+            return 'Septiembre ' + str(anho)
+        elif mes == 10:
+            return 'Octubre ' + str(anho)
+        elif mes == 11:
+            return 'Noviembre ' + str(anho)
+        else:
+            return 'Diciembre ' + str(anho)
 
 
 class Abuso (models.Model):
