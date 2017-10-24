@@ -81,6 +81,7 @@ class Usuario(AbstractUser):
 
 
 class UsuarioNormal(Usuario):
+    foto = models.ImageField(upload_to='usuario_pictures/', blank=True)
     class Meta:
         verbose_name = 'Persona Natural'
         verbose_name_plural = 'Personas Naturales'

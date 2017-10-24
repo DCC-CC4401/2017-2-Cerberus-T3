@@ -5,6 +5,14 @@ from .forms import DenunciaForm, SignUpForm
 from .models import Denuncia, UsuarioNormal, UsuarioMunicipalidad, UsuarioONG
 
 
+def home(request):
+    context = {'usuario': None}
+    if request.user.is_authenticated():
+        context = {'usuario': request.user}
+
+    return render(request, 'home.html', context)
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -27,8 +35,8 @@ def denunciar(request):
             denuncia.abuso = d_abusos
             denuncia.save()
 
-            messages.success(request, 'Denuncia realizada con éxito', extra_tags='alert')
-            return redirect('index')
+            #messages.success(request, 'Denuncia realizada con éxito', extra_tags='alert')
+            return redirect('home')
 
     else:
         form = DenunciaForm()
@@ -47,8 +55,6 @@ def crear_usuario(request):
             clave2 = form.cleaned_data['password2']
             tipo = form.cleaned_data['user_type']
 
-            usar=''
-
             if tipo == 'Usuario':
                 user = UsuarioNormal.objects.create_user(usuario)
             elif tipo == 'Municipalidad':
@@ -61,8 +67,8 @@ def crear_usuario(request):
             user.save()
 
 
-            messages.success(request, 'Usuario ' + usuario + ' creado con éxito', extra_tags='alert')
-            return redirect('index')
+            #messages.success(request, 'Usuario ' + usuario + ' creado con éxito', extra_tags='alert')
+            return redirect('home')
 
     else:
         form = SignUpForm()
