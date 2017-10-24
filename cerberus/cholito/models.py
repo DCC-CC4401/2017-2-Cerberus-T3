@@ -75,6 +75,33 @@ class Denuncia (models.Model):
     def __str__(self):
         return self.estado
 
+    def getAbusos(self):
+        abusos = ''
+        for abuso in self.abuso.all():
+            abusos+= abuso.__str__()+', '
+        abusos = abusos[:-2]
+        return abusos
+
+    def isHerido(self):
+        if self.herido is None:
+            return "No especifica"
+        elif self.herido:
+            return "Si"
+        else:
+            return "No"
+
+    def getColor(self):
+        if self.color == '':
+            return 'No especifica'
+        return self.color
+
+    def getSexo(self):
+        if self.sexo is None:
+            return "No especifica"
+        elif self.sexo == 'M':
+            return 'Macho'
+        else:
+            return 'Hembra'
 
 class Usuario(AbstractUser):
     pass

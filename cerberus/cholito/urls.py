@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^index/$', views.index, name='index'),
     url(r'^denunciar/$', views.denunciar, name='denunciar'),
     url(r'^registrarse/$', views.crear_usuario, name='signUp'),
+    url(r'^denuncia/(?P<id>[0-9]+)/$', views.ficha_denuncia, name='ficha_denuncia'),
 ]
