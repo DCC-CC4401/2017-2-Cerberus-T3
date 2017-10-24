@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block head %}
-<title>ONG | Cholito</title>
+<title>Municipalidad | Cholito</title>
 {% endblock %}
 
 
@@ -28,24 +28,21 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-
-                {% if usuario != None %}
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{ usuario.foto.url }}" class="user-image" alt="User Image">
+                            <img src="{% static "img/muni-santiago-160x160.png" %}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ user.username }}</span>
+                            <span class="hidden-xs">M. de Santiago</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{ usuario.foto.url }}" class="img-circle" alt="User Image">
-                                <p>
-                                    {{ user.username }}
-                                </p>
+                                <!-- <img src="{% static "img/user2-160x160.jpg" %}" class="img-circle" alt="User Image"> -->
+                                <img src="{% static "img/muni-santiago-160x160.png" %}" class="img-circle" alt="User Image">
+                                <p>Municipalidad de Santiago</p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -55,19 +52,11 @@
                                     </button>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{% url 'logout' %}" class="btn btn-default btn-flat">Salir</a>
+                                    <a href="login.html" class="btn btn-default btn-flat">Salir</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
-
-                {% else %}
-                    <li>
-                        <a href="{% url 'login' %}">Ingresar</a>
-                    </li>
-
-                {% endif %}
-
                 </ul>
             </div>
         </nav>
@@ -76,70 +65,47 @@
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            {% if usuario != None %}
-
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="{{ usuario.foto.url }}" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <br>
-                        <p>{{ usuario.username }}</p>
-                    </div>
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{% static "img/muni-santiago-160x160.png" %}" class="img-circle" alt="User Image">
                 </div>
-
-            {% endif %}
+                <div class="pull-left info">
+                    <!-- <br> -->
+                    <p>Municipalidad de<br>Santiago</p>
+                </div>
+            </div>
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="treeview active">
+                <!-- Optionally, you can add icons to the links -->
+                <li class="treeview active menu-open">
                     <a href="#">
-                        <i class="fa fa-search"></i>
-                        <span>Adoptar</span>
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Denuncias</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-bar-chart"></i>
+                        <span>Estadísticas</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
-                    <ul class="treeview-menu c-filtro-adoptar">
-                        <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Tipo
-                                </label>
-                            </div>
-                        <div class="form-group">
-                            <select class="form-control">
-                                <option>Perro</option>
-                                <option>Gato</option>
-                                <option>Loro</option>
-                                <option>Vaca</option>
-                                <option>Caballo</option>
-                            </select>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Edad
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control">
-                                <option>0-1</option>
-                                <option>2-4</option>
-                                <option>4-10</option>
-                            </select>
-                        </div>
+                    <ul class="treeview-menu">
+                        <li >
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i>
+                                Denuncias
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i>
+                                ONG
+                            </a>
+                        </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="{% url 'denunciar' %}">
-                        <i class="fa fa-bullhorn"></i>
-                        <span>Denunciar</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-star"></i>
-                        <span>ONG</span>
-                    </a>
                 </li>
             </ul>
             <!-- /.sidebar-menu -->
@@ -151,15 +117,38 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Adoptar</h1>
+            <h1>
+                Denuncias
+            </h1>
         </section>
         <!-- Main content -->
         <section class="content container-fluid">
-            
-            <div id="map" class="c-mapa"></div>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Tipo de Denuncia</th>
+                        <th>Animal</th>
+                        <th>Dirección</th>
+                        <th>Herido</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for denuncia in denuncias %}
+                        <tr>
+                            <td>{{ denuncia.getAbusos }}</td>
+                            <td>{{ denuncia.animal }}</td>
+                            <td>{{ denuncia.localizacion }}</td>
+                            <td>{{ denuncia.isHerido }}</td>
+                        </tr>
+                    {% endfor %}
 
+                    </tbody>
+                  </table>
+            </div>
         </section>
         <!-- /.content -->
+
     </div>
     <!-- /.content-wrapper -->
 
@@ -171,7 +160,9 @@
         </div>
         <!-- Default to the left -->
         <strong>
-            Copyright &copy; 2017 Cholito.
+            Copyright &copy; 2017
+            <!-- <a href="#">Company</a>. -->
+            Cholito.
         </strong>
         All rights reserved.
     </footer>
@@ -268,12 +259,12 @@
                 <form>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="{{ usuario.username }}">
+                        <input type="email" class="form-control" id="exampleInputEmail1" value="Municipalidad de Santiago">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Imagen de perfil</label>
                         <br>
-                        <img src="{{ usuario.foto.url }}" class="user-image" alt="User Image" width="150">
+                        <img src="{% static "img/muni-santiago-160x160.png" %}" class="user-image" alt="User Image" width="150">
                         <br><br>
                         <input type="file" id="exampleInputFile">
                     </div>
@@ -296,53 +287,5 @@
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
 Both of these plugins are recommended to enhance the
 user experience. -->
-
-<script>
-    function myMap() {
-        var mapCanvas = document.getElementById("map");
-        var myCenter = new google.maps.LatLng(-33.457394,-70.664601);
-        var centerOne= new google.maps.LatLng(-33.453291,-70.667269);
-        var centerTwo = new google.maps.LatLng(-33.455908, -70.674335);
-        var centerThree = new google.maps.LatLng(-33.466617, -70.676903); 
-        var mapOptions = {center: myCenter, zoom: 15};
-        var map = new google.maps.Map(mapCanvas,mapOptions);
-        var myCity = new google.maps.Circle({
-            center: myCenter,
-            radius: 15,
-            strokeColor: "#0000FF",
-            strokeOpacity: 0.7,
-            strokeWeight: 2,
-            fillColor: "#0000FF",
-            fillOpacity: 0.4
-        });
-        var map = new google.maps.Map(mapCanvas,mapOptions);
-        myCity.setMap(map);
-        google.maps.event.addListener(map, 'click', function(event) {
-            placeMarker(map, event.latLng);
-        });
-        var infowindow = new google.maps.InfoWindow({
-            content:"ONG Favorita"
-        });
-        var markerOne = new google.maps.Marker({
-            position: centerOne,
-            icon: "{% static 'img/star2.png' %}"
-        });
-        markerOne.setMap(map);
-        infowindow.open(map,markerOne);
-    }
-
-    function placeMarker(map, location) {
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map
-        });
-        var infowindow = new google.maps.InfoWindow({
-            content: 'Nombre ONG'
-        });
-        infowindow.open(map,marker);
-    }
-</script>
-<!-- Mapa de google -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKrwK5Ra7Lrbam0i1ifeMrlPHnN1Tctpk&callback=myMap"></script>
 
 {% endblock %}

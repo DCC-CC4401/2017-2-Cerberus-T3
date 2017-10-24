@@ -8,9 +8,20 @@ from .models import Denuncia, UsuarioNormal, UsuarioMunicipalidad, UsuarioONG
 def home(request):
     context = {'usuario': None}
     if request.user.is_authenticated():
-        context = {'usuario': request.user}
+        user = request.user
+        tipo = user.__class__.__name__
+        if tipo == 'UsuarioMunicipalidad':
+            context = {'usuario': user, 'denuncias': Denuncia.objects.all()}
+            return render(request, 'homeMuni.html', context)
+
+        elif tipo == 'UsuarioONG':
+            return render(request, 'index.html')
+
+        else: # tipo == 'UsuarioNormal'
+            context = {'usuario': request.user}
 
     return render(request, 'home.html', context)
+
 
 
 def index(request):
