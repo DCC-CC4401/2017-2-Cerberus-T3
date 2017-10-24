@@ -127,6 +127,7 @@
                 <table class="table table-striped">
                     <thead>
                       <tr>
+                        <th>Ficha</th>
                         <th>Tipo de Denuncia</th>
                         <th>Animal</th>
                         <th>Dirección</th>
@@ -136,6 +137,7 @@
                     <tbody>
                     {% for denuncia in denuncias %}
                         <tr>
+                            <td ><a href = "{% url 'ficha_denuncia' denuncia.id %}">{{ denuncia.pk }}</a></td>
                             <td>{{ denuncia.getAbusos }}</td>
                             <td>{{ denuncia.animal }}</td>
                             <td>{{ denuncia.localizacion }}</td>

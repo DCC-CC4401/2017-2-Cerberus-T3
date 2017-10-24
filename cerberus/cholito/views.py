@@ -85,3 +85,8 @@ def crear_usuario(request):
         form = SignUpForm()
 
     return render(request, 'signUp.html', {'form': form})
+
+
+def ficha_denuncia(request, id):
+    denuncia = Denuncia.objects.get(pk=id)
+    return render(request, 'fichaDenuncia.html', {'denuncia': denuncia})

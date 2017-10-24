@@ -84,11 +84,24 @@ class Denuncia (models.Model):
 
     def isHerido(self):
         if self.herido is None:
-            return "No se sabe"
+            return "No especifica"
         elif self.herido:
             return "Si"
         else:
             return "No"
+
+    def getColor(self):
+        if self.color == '':
+            return 'No especifica'
+        return self.color
+
+    def getSexo(self):
+        if self.sexo is None:
+            return "No especifica"
+        elif self.sexo == 'M':
+            return 'Macho'
+        else:
+            return 'Hembra'
 
 class Usuario(AbstractUser):
     pass
