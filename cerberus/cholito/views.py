@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import DenunciaForm, SignUpForm
 
-from .models import Denuncia, UsuarioNormal, UsuarioMunicipalidad, UsuarioONG
+from .models import Denuncia, UsuarioNormal, UsuarioMunicipalidad, UsuarioONG, Animal
 
 
 def home(request):
@@ -90,3 +90,8 @@ def crear_usuario(request):
 def ficha_denuncia(request, id):
     denuncia = Denuncia.objects.get(pk=id)
     return render(request, 'fichaDenuncia.html', {'denuncia': denuncia})
+
+
+def ficha_animal(request, id):
+    animal = Animal.objects.get(pk=id)
+    return render(request, 'fichaAnimal.html', {'animal': animal})
